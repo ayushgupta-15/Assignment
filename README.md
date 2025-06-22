@@ -1,68 +1,48 @@
-# 🚀 CometChat Partner Website Clone
+# 🚀 CometChat Partner Portal (Frontend Clone)
 
-A sleek and responsive landing page inspired by CometChat's design — built with **React**, **Vite**, and **Tailwind CSS**.
+A modern, responsive frontend built with **React**, **Vite**, and **Tailwind CSS**, inspired by CometChat’s official site. This project demonstrates polished UI design, component modularity, and animation effects using utility-first CSS.
 
-## ✨ Features
+---
 
-- 🔥 Custom animated Hero section with planets and comets
-- 📌 Clean Navbar with modern layout
-- 🎨 Styled using **Tailwind CSS** 
-- 💻 Responsive design across devices
-- ⚙️ Modular React component structure
-- 🎥 Smooth UI transitions and visual hierarchy
+## 📸 Preview
 
-## 🧩 Tech Stack
+![Project Preview](public/preview.png) <!-- Replace this with an actual screenshot or remove this section if not applicable -->
 
-- **Frontend**: React + Vite
-- **Styling**: Tailwind CSS
-- **Icons/Assets**: SVG and animated shapes
+---
 
-## 📂 Project Structure
+## 🛠️ Features
 
-cometchat/
-├── public/
-│ └── logos/ # Brand logos for partner section
-├── src/
-│ ├── components/ # Reusable React components
-│ │ ├── Navbar.jsx
-│ │ ├── Hero.jsx
-│ │ ├── PlatformSection.jsx
-│ │ ├── BenefitsSection.jsx
-│ │ ├── Footer.jsx
-│ │ └── ...
-│ ├── App.jsx
-│ ├── main.jsx
-│ └── index.css
-├── tailwind.config.js
-├── vite.config.js
-└── README.md
+- ⚡ Built with Vite for lightning-fast development
+- 🎨 Tailwind CSS for styling
+- 🧩 Modular React components
+- 🌌 Animated hero section with comets and planets
+- 💬 Clean, responsive design
+- 🧠 Uses Satoshi Variable font for sharp modern typography
 
-## 🛠️ Setup Instructions
+---
+## 📦 Installation
 
-1. **Clone the repository**
+Make sure you have **Node.js** and **npm** installed.
+
+1. **Clone the repository:**
    ```bash
    git clone https://github.com/ayushgupta-15/Assignment.git
    cd Assignment
-Install dependencies
-
+2. **Install dependencies:**
 npm install
-Start the development server
 
+🧪 Run the Development Server
 npm run dev
-Build for production
 
+Then open your browser and go to:
+📍 http://localhost:5173
+
+🏗️ Build for Production
+To create a production-ready build:
 npm run build
 
-🌐 Live Demo
-🔗 Coming soon...
+📌 License
+This is a personal project and is not affiliated with CometChat. Use for learning and showcase purposes.
 
-📸 Screenshots
-(Add screenshots or GIFs of the Hero section, Navbar, etc. here)
-
-📄 License
-This project is for educational/demo purposes only and not affiliated with CometChat.
-
-👨‍💻 Built with ❤️ by Ayush Gupta
----
-
-Let me know if you want a live deploy badge, custom GIF, or contribution instructions.
+👨‍💻 Author
+Ayush Gupta
