@@ -1,159 +1,94 @@
-"use client"
+// src/components/PreFooter.jsx
+import { useMemo } from 'react';
 
-import { useState, useEffect } from "react"
+/* quick helper – sprinkle some tiny stars */
+const useStars = (count = 25) =>
+  useMemo(
+    () =>
+      Array.from({ length: count }).map(() => ({
+        left: Math.random() * 100 + '%',
+        top: Math.random() * 100 + '%',
+        size: Math.random() > 0.7 ? 3 : 2,
+        color: Math.random() > 0.6 ? '#6852D6' : Math.random() > 0.3 ? '#B15324' : 'rgba(250,250,255,.5)',
+      })),
+    [count]
+  );
 
 export default function PreFooter() {
-  const [isVisible, setIsVisible] = useState(false)
-
-  useEffect(() => {
-    setIsVisible(true)
-  }, [])
+  const stars = useStars();
 
   return (
-    <section
-      className="relative overflow-hidden text-white flex items-center justify-center"
-      style={{
-        width: "1440px",
-        height: "480px",
-        margin: "0 auto",
-        backgroundColor: "#0A0914",
-      }}
-    >
-      {/* Stars Background */}
+    <section className="relative isolate overflow-hidden bg-background w-full">
+      {/* ---------- decorative planets / blobs ---------- */}
+      {/* big pink-purple planet (top-left on desktop, hidden on xs) */}
       <div
-        className="absolute inset-0 opacity-20"
+        className="hidden sm:block absolute -left-40 -top-40 w-[420px] h-[420px] rounded-full blur-3xl"
         style={{
-          width: "1389px",
-          height: "803px",
-          left: "calc(50% - 1389px/2 - 0.5px)",
-          top: "-68px",
+          background:
+            'radial-gradient(circle at 30% 30%, #FCB8A8 0%, #B968A4 45%, #756CF7 75%)',
+          opacity: 0.6,
         }}
-      >
-        {/* Animated stars */}
-        {[...Array(50)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-1 h-1 bg-white rounded-full animate-pulse"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 3}s`,
-              animationDuration: `${2 + Math.random() * 2}s`,
-            }}
-          />
-        ))}
-      </div>
-
-      {/* Left Pink Gradient Circle */}
+      />
+      {/* orange/purple planet (bottom-right) – smaller on phones  */}
       <div
-        className="absolute rounded-full opacity-80"
+        className="absolute right-4 sm:right-24 bottom-4 sm:bottom-12 w-28 h-28 sm:w-40 sm:h-40 rounded-full blur-3xl"
         style={{
-          width: "395.23px",
-          height: "395.23px",
-          left: "-213.32px",
-          top: "-67.52px",
-          background: "radial-gradient(circle, #FF6B9D 0%, #C44569 50%, rgba(196, 69, 105, 0) 100%)",
-          transform: "rotate(-13.38deg)",
-          filter: "blur(40px)",
+          background:
+            'radial-gradient(circle at 30% 30%, #FFB590 0%, #FF7F3E 50%, #45368D 100%)',
+          opacity: 0.8,
         }}
       />
 
-      {/* Right Orange Gradient Circle */}
+      {/* ---------- faint orbital ring (desktop only) ---------- */}
       <div
-        className="absolute rounded-full opacity-80"
+        className="hidden lg:block absolute inset-0 pointer-events-none"
         style={{
-          width: "300px",
-          height: "300px",
-          right: "-100px",
-          top: "50px",
-          background: "radial-gradient(circle, #FF8A65 0%, #FF7043 50%, rgba(255, 112, 67, 0) 100%)",
-          filter: "blur(30px)",
+          background: 'transparent',
+          borderTop: '1px solid rgba(255,255,255,.04)',
+          borderRadius: '50%',
+          transform: 'translateY(-40%)',
         }}
       />
 
-      {/* Comet Element */}
-      <div
-        className="absolute opacity-60"
-        style={{
-          width: "140px",
-          height: "140px",
-          left: "1262px",
-          top: "296px",
-        }}
-      >
+      {/* ---------- star field ---------- */}
+      {stars.map((s, i) => (
         <div
-          className="w-full h-full rounded-full animate-pulse"
-          style={{
-            background: "radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 70%)",
-            filter: "blur(20px)",
-          }}
+          key={i}
+          className="absolute rounded-full"
+          style={{ left: s.left, top: s.top, width: s.size, height: s.size, background: s.color }}
         />
-      </div>
+      ))}
 
-      {/* Blur Layer */}
-      <div
-        className="absolute opacity-40"
-        style={{
-          width: "208.52px",
-          height: "199.84px",
-          left: "19.52px",
-          top: "128.01px",
-          background: "radial-gradient(46.41% 46.41% at 50% 50%, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%)",
-          border: "28px solid rgba(255, 255, 255, 0.1)",
-          filter: "blur(8px)",
-          transform: "rotate(-4.37deg)",
-          borderRadius: "50%",
-        }}
-      />
+      {/* ---------- gradient vignette top / bottom ---------- */}
+      <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[#0A0914] to-transparent pointer-events-none" />
+      <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#0A0914] to-transparent pointer-events-none" />
 
-      {/* Main Content */}
-      <div
-        className={`text-center z-10 transform transition-all duration-1000 ${
-          isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-        }`}
-      >
-        <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+      {/* ---------- MAIN CONTENT ---------- */}
+      <div className="relative z-10 mx-auto max-w-2xl px-4 sm:px-6 lg:px-0 py-20 sm:py-28 text-center">
+        <h2 className="text-[32px] sm:text-5xl font-semibold leading-tight text-gray-12 mb-6">
           Get started for free
         </h2>
-        <p className="text-xl text-gray-300 mb-8 max-w-md mx-auto leading-relaxed">
-          Build and test for as long as you need.
-          <br />
-          Pick a plan when you're ready.
+        <p className="text-lg sm:text-xl text-gray-12/75 max-w-lg mx-auto mb-10">
+          Build and test for as long as you need. Pick a plan when you're ready.
         </p>
 
-        <div className="flex gap-4 justify-center items-center">
-          <button
-            className="px-8 py-3 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-gray-900 transition-all duration-300 hover:scale-105 hover:shadow-lg"
-            onClick={() => console.log("Start free trial clicked")}
-          >
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          {/* outline button */}
+          <button className="px-6 py-3 rounded-xl border border-white/10 text-sm font-semibold text-gray-12 hover:bg-white/5 transition-colors">
             Start free trial
           </button>
-          <button
-            className="px-8 py-3 font-semibold rounded-lg text-white transition-all duration-300 hover:scale-105 hover:shadow-xl relative overflow-hidden group"
-            style={{
-              background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-            }}
-            onClick={() => console.log("Schedule a demo clicked")}
-          >
+
+          {/* filled / gradient button with glow */}
+          <button className="relative px-6 py-3 rounded-xl bg-[#6852D6] text-sm font-semibold text-white hover:bg-[#5b47c9] transition-colors overflow-hidden">
             <span className="relative z-10">Schedule a demo</span>
-            <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            {/* glow */}
+            <div
+              className="absolute -left-4 -top-4 w-16 h-16 bg-[#D8D2F4] opacity-70 blur-xl"
+              aria-hidden="true"
+            />
           </button>
         </div>
       </div>
-
-      {/* Additional floating elements for enhanced visual appeal */}
-      <div
-        className="absolute top-20 left-20 w-4 h-4 bg-blue-400 rounded-full opacity-60 animate-bounce"
-        style={{ animationDelay: "0.5s" }}
-      />
-      <div
-        className="absolute bottom-20 right-40 w-3 h-3 bg-purple-400 rounded-full opacity-60 animate-bounce"
-        style={{ animationDelay: "1s" }}
-      />
-      <div
-        className="absolute top-40 right-20 w-2 h-2 bg-pink-400 rounded-full opacity-60 animate-bounce"
-        style={{ animationDelay: "1.5s" }}
-      />
     </section>
-  )
+  );
 }
